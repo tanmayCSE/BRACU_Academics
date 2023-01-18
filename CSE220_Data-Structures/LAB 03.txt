@@ -1,0 +1,198 @@
+//Name: Tanmay Bhowmik; ID: 19101465; Sec: 02
+//Lab Assignment 03
+
+
+public class Node {
+	  public int element;
+	  public Node next;
+	  public Node prev;
+	  
+	  public Node(int e, Node n, Node p){
+	    element =e ;
+	    next = n;
+	    prev =p;
+	    
+	  }
+
+}
+
+
+public class DoublyListTester {
+	public static void main (String[]args){
+	
+     System.out.println("Task 2(2)");
+     int [] a1 = {10,20,30,40};
+     DoublyList h1 = new DoublyList(a1);
+     h1.showList();
+     System.out.println();
+     
+     
+     System.out.println("Task 2(3)");
+     int [] a2 = {10,20,30,40};
+     DoublyList h2 = new DoublyList(a2);
+     h2.insert(3);
+     h2.showList();
+     System.out.println();
+     
+     
+     System.out.println("Task 2(4)");
+     int [] a3 = {10,20,30,40};
+     DoublyList h3 = new DoublyList(a3);
+     h3.insert(2, 2);
+     h3.showList();
+     System.out.println();
+     
+     
+     System.out.println("Task 2(5)");
+     int [] a4 = {10,20,30,40};
+     DoublyList h4 = new DoublyList(a4);
+     h4.remove(2);
+     h4.showList();
+     System.out.println();
+     
+     
+     System.out.println("Task 2(6)");
+     int [] a5 = {10,20,30,40};
+     DoublyList h5 = new DoublyList(a5);
+     h5.removeKey(40);
+     h5.showList();
+     System.out.println();
+
+    }
+
+}
+
+
+public class DoublyList {
+	public Node head;
+	
+	
+	//Task2(1.a)
+    public DoublyList(int [] a){
+    	head = new Node(a[0], null, null);
+	    Node tail = head;
+	    
+	    for(int i = 0; i<a.length; i++)
+	    {
+	      Node temp = new Node(a[i], null, null);
+	      tail.next = temp;
+	      temp.prev=tail;
+	      tail=tail.next;
+	    }
+	    tail.next=head;
+	    head.prev=tail;
+	  }
+	
+	
+    //Task2(2)
+	public void showList(){
+	    Node x = head;
+	    for(x = x.next ; x.next!=head ; x = x.next){
+	      System.out.print(x.element+", ");
+	    }
+	    System.out.println(x.element);
+	  }
+	
+	
+
+	
+	//Task2(3)
+	public void insert(int newElement) {
+		Node tail;
+		tail=head.prev;
+		Node current = head.next;
+		while (current != head){
+		if(current.element == newElement){
+		return;
+		}
+		current = current.next;
+		}
+		Node node = new Node(newElement, tail, null);
+		tail.next = node;
+		
+		node.next=head;
+		head.prev=node;
+		tail.next=node;
+		}
+	
+	
+	//Task2(4)
+	public void insert(int newElement, int index){
+	    Node x = new Node(newElement , null , null);
+	    Node y = null;
+	    Node z = null;
+	    Node temp = head;
+	    int count = 0;
+	    while(temp.next!=head){
+	      count++;
+	      temp = temp.next;
+	    }  
+	    int c = count;
+	    if(index<0 || index>c){  
+	    }
+	    else{
+	      
+	      for(int i = 0 ; i<=index ; i++){
+	        temp = temp.next;
+	      }
+	      y = temp.prev;
+	      z = temp;
+	      y.next = x;
+	      x.next = z;
+	      x.prev = y;
+	      z.prev = x;
+	      
+	    }
+	  }
+
+	
+	
+	//Task2(5)
+	public Object remove(int index){
+		    Node temp = head;
+		    Node y = null;
+		    Node x = null;
+		    Node z = null;
+		    int count = 0;
+		    while(temp.next!=head){
+		      count++;
+		      temp = temp.next;
+		    }
+		    int c = count;
+		    if(index<0 || index>c){
+		    }
+		    else{
+		      for(int i = 0 ; i<=index ; i++){
+		        temp = temp.next;
+		      }
+		      y = temp;
+		      x = temp.prev;
+		      z = temp.next;
+		      x.next = z;
+		      z.prev = x;
+		    }
+		    return y.element;
+		  }
+	
+	
+	
+	//Task2(6)
+	public Node removeKey(int deleteKey) {
+		for(Node x=head.next; x.next!=head; x=x.next)
+		{
+			Node k = new Node(deleteKey, null, null);
+			if(x.next.element==k.element) {
+				Node temp=x.next.next;
+				
+				Node temp2=x.next;
+				x.next=temp;
+				
+				return temp2;
+			}
+			
+			
+		}
+		return null;
+	}
+		
+}

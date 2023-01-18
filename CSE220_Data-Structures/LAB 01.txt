@@ -1,0 +1,338 @@
+import java.util.Random;
+
+public class 02_19101465_TanmayBhowmik_LabAssignment01 {
+	public static void main (String[] args) {
+		
+		
+		
+		
+		int[]source1 = {10, 20, 30, 40, 50, 60};
+		LinearArrayTask01_Shiftleft(source1, 3);
+		System.out.println();
+		
+		
+		int[]source2 = {10, 20, 30, 40, 50, 60};
+		LinearArrayTask02_rotateleft(source2, 3);
+		System.out.println();
+		
+		
+		int[]source3 = {10, 20, 30, 40, 50, 0, 0};
+		LinearArrayTask03_removeElement(source3, 5, 2);
+		System.out.println();
+		
+		
+		int[]source4 = {10, 2, 30, 2, 50, 2, 2, 60, 0, 0};
+		LinearArrayTask04_removeAll(source4, 8, 2);
+		System.out.println();
+		
+		
+		int[]source5 = {1, 1, 1, 2, 109};
+		boolean result = LinearArrayTask05_SplittingArray(source5);
+		System.out.println(result);
+		System.out.println();
+		
+		
+		int[]source6 = LinearArrayTask06_arraySeries(4);
+                for (int i = 0; i < source6.length; i++) {
+                  System.out.print(source6[i]+" ");
+                 }
+                System.out.println();
+                System.out.println();
+        
+		
+		int[]source7 = {1, 2, 2, 3, 4, 4, 4};
+		LinearArrayTask07_maxBunch(source7);
+		System.out.println();
+		
+		
+		int[]source8 = {4,5,6,6,4,3,6,4};
+                boolean Result= LinearArrayTask08_repetation(source8);
+                System.out.println(Result);
+		System.out.println();
+		
+		
+		
+                int[]source9 = {20, 10, 0, 0, 0, 10, 20, 30};
+		boolean RESULT= CircularArrayTask01_palindrome(source9, 5, 5);
+		System.out.println(RESULT);
+		System.out.println();
+		
+		
+		int []source10= {40, 50, 0, 0, 0, 12, 20, 30};
+		int[]source11= {10, 20, 5, 0, 0, 0, 0, 0, 5, 40, 15, 25};
+		CircularArrayTask02_Intersection(source10, source11, 5, 5, 8, 7);
+		System.out.println();
+		System.out.println();
+		
+		
+		int[]source12= {10, 20, 30, 40, 50, 60, 70};
+		CircularArrayTask03_musicalChair(source12, 7);
+                for(int i : source12) System.out.print(i+" ");
+        
+ }
+	
+	
+	
+	
+	
+public static void LinearArrayTask01_Shiftleft (int[] s, int k) {
+		for(int i =0; i<k; i++) {
+			s[i]=s[i+k];
+		}
+		for(int i= s.length-1; i>=k; i-- ) {
+			s[i]=0;
+		}
+		for(int i = 0; i<s.length; i++) {
+			System.out.println(s[i]);
+		}
+	}
+	
+
+
+
+	
+public static void LinearArrayTask02_rotateleft (int[] s, int k) {
+	int[]temp=new int[k];
+	for (int i =0; i<temp.length; i++) {
+		temp[i]=s[i];
+	}
+	
+	for(int i =0; i<k; i++) {
+		s[i]=s[i+k];
+	}
+	
+	for(int i=s.length-k; i<s.length; i++) {
+		s[i]=temp[i-k];
+	}
+	for(int i = 0; i<s.length; i++) {
+		System.out.println(s[i]);
+	}
+}
+
+
+
+
+public static void LinearArrayTask03_removeElement (int[]s, int size, int index) {
+	
+	for(int i =index; i<s.length-1; i++) {
+		s[i]=s[i+1];
+	}
+	
+	for(int i = 0; i<s.length; i++) {
+		System.out.println(s[i]);
+	}
+}
+
+
+
+
+public static void LinearArrayTask04_removeAll (int[]s, int size, int value) {
+	
+	for(int i =1; i<s.length-1; i++) {
+		s[i]=s[i+1];
+	}
+	
+	for(int i =2; i<s.length-1; i++) {
+		s[i]=s[i+1];
+	}
+	
+	for(int i =3; i<s.length-1; i++) {
+		s[i]=s[i+1];
+	}
+	for(int i =3; i<s.length-1; i++) {
+		s[i]=s[i+1];
+	}
+	
+	
+	for(int i = 0; i<s.length; i++) {
+		System.out.println(s[i]);
+	}
+}
+
+
+
+
+public static boolean LinearArrayTask05_SplittingArray (int[]s) {
+	for(int i=0; i<s.length-1; i++) {
+		int leftsum=0;
+		for (int j=0; j<=i; j++) {
+			leftsum =leftsum+ s[j];
+		}
+		int rightsum=0;
+		for(int k = i+1; k<s.length; k++) {
+			rightsum= rightsum+s[k];
+		}
+		if(leftsum==rightsum) {
+			return true;
+		}
+		
+	}
+	return false;
+}
+
+
+
+
+public static int[] LinearArrayTask06_arraySeries(int s) {
+    int a[] = new int [s*s];
+    int b =1;
+    int c = s;
+    int count =0;
+    
+    for (int i = s*s-1; i >=0; i--) {
+        a[i] =b;
+        b++;
+        
+        if(i%c==0&&c!=0) {
+                 b=1;
+                 i = i-count;
+                 c--;
+                 count++;
+            }
+        if(c==0) {
+            b=0;
+        }          
+    }
+    return a;
+}
+
+
+
+
+public static void LinearArrayTask07_maxBunch (int[]s) {
+	int maxCount=0;
+	
+	
+	for (int i=0; i<s.length; i++) {
+		int count=1;
+		for(int j=i+1; j<s.length; j++) {
+			if(s[i]==s[j]) {
+				count++;
+			}
+			else {
+				count=0;
+			}
+			if(maxCount<count) {
+				maxCount=count;
+			}
+		}
+	}
+	System.out.println(maxCount);
+}
+
+
+
+
+public static boolean LinearArrayTask08_repetation(int[]s) {
+    int max =s[0];
+    for(int i=1; i<s.length; i++) {
+        if(s[i]>max) {
+            max = s[i];
+        }
+    }
+
+
+    int[]count= new int[max+1];
+    for(int i =0; i<s.length; ++i) {
+        count[s[i]]+=1;
+
+    }
+
+    int minValue= 1;
+    for(int i=0; i<count.length; i++) {
+        for(int j=i+1; j<count.length; j++) {
+          if(count[i]>minValue) {
+          if(count[i]==count[j]) {
+            return true;
+            }
+            }
+        }
+    }
+    return false;
+}
+
+
+
+
+public static boolean CircularArrayTask01_palindrome(int[]s, int start, int size) {
+	
+	int []s1= new int[size];
+	for(int i=0; i<size; i++) {
+		s1[i]=s[start];
+		start=(start+1)%s.length;
+	}
+	boolean result=false;
+	int j=s1.length-1;
+	for(int i =0; i<size/2; i++) {
+		if(s1[i]==s1[j]) {
+			result=true;
+		}
+		else {
+			result=false;
+			break;
+		}
+		j--;
+	}
+	return result;
+	}
+	
+
+
+
+
+public static void CircularArrayTask02_Intersection(int[]s1, int[]s2, int start1, int size1, int start2, int size2) {
+	   int index1=start1;
+	   for(int i=0; i<size1; i++) {
+		   int index2=start2;
+		   for(int j=0; j<size2; j++) {
+			   if(s1[index1]==s2[index2]){
+				   System.out.print(s1[index1]+" ");
+			   }
+			   index2=(index2+1)%s2.length;
+		   }
+		   index1=(index1+1)%s1.length;
+	   }
+}
+
+
+
+
+public static void CircularArrayTask03_musicalChair(int[]s, int size) {
+while(true){
+    Random rand= new Random();
+    int randomNumber=rand.nextInt(4);
+    System.out.println(randomNumber);
+
+     if(randomNumber==1) {
+         if(size==s.length){
+              for(int i =size/2; i<size-1; i++) {
+                s[i]=s[i+1]; 
+                s[i+1]=0;
+
+           } size--;
+         }
+         else{
+         for(int i =size/2; i<size; i++) {
+                s[i]=s[i+1]; 
+                s[i+1]=0;
+
+
+           } size--;
+         }
+     } 
+
+     else {
+         int temp=s[size-1];
+         for(int i=size-1; i>=1; i--) {
+             s[i]=s[i-1];
+         }
+         s[0]=temp;
+
+
+     }
+
+
+     if (size==1) break;
+   }
+  }
+ }

@@ -1,0 +1,76 @@
+public class keyIndex {
+    public static int[]k={4,2,3,-5,-2,-3,4,7,4};;
+    public static int[]new_k;
+
+    public static void main(String[] args) {
+
+        keyIndex h1= new keyIndex(k);
+        System.out.println();
+        boolean result=search( 7);
+        System.out.println(result);
+        sort();
+
+    }
+
+    public keyIndex(int[] a) {
+        int max = a[0];
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] > max)
+                max = a[i];
+        }
+
+        int min = 0;
+        for (int i = 0; i < k.length; i++) {
+            if (k[i] < min) {
+                min = k[i];
+            }
+        }
+
+        int x = -1 * min;
+
+        for (int i = 0; i < k.length; i++) {
+            k[i]=k[i]+x;
+        }
+        new_k = new int[max +x+ 1];
+        for (int i = 0; i < a.length; i++) {
+            int index = a[i];
+            new_k[index]=new_k[index]+1;
+        }
+    }
+
+    public static boolean search(int idx) {
+
+        if(idx<0 || idx>=new_k.length){
+            return false;
+        }
+        else if(new_k[idx]!=0){
+            return true;
+        }
+        return false;
+    }
+
+    public static void sort() {
+
+        int min =0;
+        for (int i = 0; i < k.length; i++) {
+            if (k[i] < min) {
+                min = k[i];
+            }
+        }
+        for (int i = 0; i < new_k.length; i++) {
+            for (int j = 0; j < new_k[i]; j++) {
+                System.out.print(i-5+min + ", ");
+            }
+        }
+        System.out.println();
+    }
+
+    public static void print(){
+        for (int i = 0; i < new_k.length; i++) {
+
+            System.out.print(new_k[i]+", ");
+        }
+        System.out.println();
+    }
+
+}

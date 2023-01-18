@@ -1,0 +1,232 @@
+//Name: Tanmay Bhowmik; ID: 19101465; Sec: 02; Lab-Assignment 05;
+
+public class Recursion {
+
+    public static void main(String[] args) {
+        System.out.println("Task01-(a) factorial of n:");
+        System.out.println(factorial(5));
+        System.out.println();
+
+        System.out.println("Task01-(b) n-th Fibonacci number:");
+        System.out.println(fibonacci(8));
+        System.out.println();
+
+        System.out.println("Task01-(c) printing array recursively:");
+        int[] A = { 10, 20, 30, 40 };
+        printArray(A, 0);
+        System.out.println();
+
+        System.out.println("Task01-(d) value of base:");
+        System.out.println(powerN(3, 2));
+        System.out.println();
+
+        System.out.println("Task02-(a) conversion of binary number:");
+        System.out.println(binary(8));
+        System.out.println();
+
+        System.out.println("Task02-(b) add all the elements:");
+        int[] array = {1, 2, 3};
+        LinkedList list = new LinkedList(array);
+        System.out.println(addElements(list.head));
+        System.out.println();
+
+        System.out.println("Task02-(c) reverse elements:");
+        int[] a={10, 20, 30, 40, 50};
+        LinkedList rev=new LinkedList(a);
+        reverse(rev.head);
+        System.out.println();
+
+        System.out.println("Task03 - house of cards:");
+        System.out.println(hocBuilder(3));
+        System.out.println();
+
+        System.out.println("Task04-(a) right triangle:");
+        draw(5);
+        System.out.println();
+
+        System.out.println("Task04-(b) left triangle:");
+        mainDraw(5);
+        System.out.println();
+
+        System.out.println("Task05 - calculation of profit:");
+        int[]Array={25000, 100000, 250000, 350000};
+        print(Array, 0);
+    }
+
+
+
+    public static int factorial(int n) {
+        if (n == 1)
+            return 1;
+        return n * factorial(n - 1);
+    }
+
+    public static int fibonacci(int n) {
+        if (n == 1 || n == 2)
+            return 1;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    public static void printArray(int[] A, int i) {
+        if (i < A.length) {
+            System.out.println(A[i]);
+            printArray(A, i + 1);
+        }
+    }
+
+    public static int powerN(int n, int m) {
+        if (m == 0)
+            return 1;
+        return n * powerN(n, m - 1);
+    }
+
+    public static String binary(int dec) {
+        if (dec == 0)
+            return "";
+        return binary(dec / 2) + dec % 2;
+    }
+
+    public static int addElements (Node n){
+        if (n == null){
+            return 0;
+        }
+        else{
+            return n.element + addElements(n.next);
+        }
+
+    }
+
+    public static void reverse(Node h){
+        if(h.next!=null){
+            reverse(h.next);
+            System.out.println(h.element);
+        }
+    }
+
+
+    public static int hocBuilder(int height){
+        if(height<=1) {
+            if(height==0)
+                return 0;
+            else return 5+3;
+        }
+        return 5+hocBuilder(height-1);
+    }
+
+    public static void draw(int n){
+        if(n==1){
+            System.out.println(n);
+            return;
+        }
+        draw(n-1);
+        draw2(n);
+        System.out.println();
+    }
+
+    public static void draw2(int n){
+        if(n==1){
+            System.out.print(n);
+            return;
+        }
+        draw2(n-1);
+        System.out.print(n);
+    }
+
+    public static void Draw(int n, int m){
+        if(n==0){
+            return;
+        }
+        Draw(n-1, m);
+        Draw3(m-n);
+        Draw2(n);
+        System.out.println();
+    }
+
+    public static void Draw2(int n){
+        if(n==1){
+            System.out.print(n);
+            return;
+        }
+        Draw2(n-1);
+        System.out.print(n);
+    }
+
+    public static void Draw3(int n) {
+        if(n==0) {
+            return;
+        }
+        System.out.print(" ");
+
+        Draw3(n-1);
+    }
+
+    public static void mainDraw(int n) {
+        Draw(n, n);
+    }
+
+
+    public static void print(int[]Array, int idx){
+        if(idx<Array.length) {
+            double profit=calcProfit(Array[idx]);
+            System.out.println("Investment: " + Array[idx] + " Profit: " + profit);
+            print(Array, idx+1);
+        }
+    }
+    public static double calcProfit(int investment) {
+        if(investment<=25000)
+            return 0;
+        if(investment>75000+25000) {
+            return 8+calcProfit(investment-100);
+        }
+        return 4.5+calcProfit(investment-100);
+    }
+
+}
+
+
+
+
+public class Node{
+    public int element;
+    public Node next;
+
+    public Node(int e, Node n){
+        element =e ;
+        next = n;
+
+    }
+
+}
+
+
+
+
+public class LinkedList{
+    public Node head;
+
+    public LinkedList(int [] a){
+        head = new Node(a[0],null);
+        Node tail = head;
+        for (int i = 1 ; i<a.length ; i++){
+            Node x = new Node (a[i] , null);
+            tail.next = x;
+            tail = tail.next;
+        }
+    }
+
+    public LinkedList(Node h){
+        head = h;
+    }
+
+    public Node reverseList(){
+        Node reverseNode = new Node (head.element , null);
+
+        for(Node n = head.next ; n!=null ; n = n.next){
+            Node  x = new Node (n.element , reverseNode);
+            reverseNode = x;
+        }
+
+        return reverseNode;
+    }
+
+}

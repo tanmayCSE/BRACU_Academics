@@ -1,0 +1,178 @@
+public class trees{
+
+    public static void main(String[]args){
+        Object[] Array = {null,9,4,13,2,7,null,19,null,3,5,null,null,null,17};
+        Node root = tree_builder(Array,1);
+        System.out.println("Height of the tree: "+height_of_tree(root));
+        System.out.println();
+
+        Object[] Array01 = {null,9,4,13,2,7,null,19,null,3,5,null,null,null,17};
+        Node root1 = tree_builder(Array01,1);
+        System.out.println("Level of a Node in the tree: "+level_in_tree(root1.right.right.left));
+        System.out.println();
+
+        Object[] Array02 = {null,9,4,13,2,7,null,19,null,3,5,null,null,null,17};
+        Node root3 = tree_builder(Array02,1);
+        System.out.println("Pre-order Traversal: ");
+        pre_order_traversal(root3);
+        System.out.println();
+
+        Object[] Array03 = {null,9,4,13,2,7,null,19,null,3,5,null,null,null,17};
+        Node root4 = tree_builder(Array03,1);
+        System.out.println("In-order Traversal: ");
+        in_order_traversal(root4);
+        System.out.println();
+
+        Object[] Array04 = {null,9,4,13,2,7,null,19,null,3,5,null,null,null,17};
+        Node root5 = tree_builder(Array04,1);
+        System.out.println("Post-order Traversal: ");
+        post_order_traversal(root5);
+        System.out.println();
+
+        Object[] Array05 = {null,9,4,13,2,7,null,19,null,3,5,null,null,null,17};
+        Object[] Array06 = {null,9,4,13,2,7,null,19,null,3,5,null,null,null,17};
+        Node root6 = tree_builder(Array05,1);
+        Node root7 = tree_builder(Array06,1);
+        System.out.println(exactly_same(root6 , root7));
+        System.out.println();
+
+        Object[] Array07 = {null,9,4,13,2,7,null,19,null,3,5,null,null,null,17};
+        Node root8 = tree_builder(Array07,1);
+        Node copy = copy_tree(root8);
+        System.out.println("Copied Tree");
+        in_order_traversal(copy);
+
+
+    }
+    public static Node tree_builder(Object[]a, int i){
+        if(i<0 || i>=a.length || a[i]==null) {
+            return null;
+        }
+        else{
+            Node root = new Node (a[i],null,null,null);
+            Node myLeft = tree_builder(a,2*i);
+            Node myRight = tree_builder(a,2*i+1);
+            root.left=myLeft;
+            root.right=myRight;
+            if(myLeft!=null) {
+                myLeft.parent = root;
+            }
+            if(myRight!=null) {
+                myRight.parent = root;
+            }
+            return root;
+        }
+    }
+
+
+
+
+    public static int height_of_tree(Node Root){
+        if(Root==null){
+            return 0;
+        }
+        return 1+check(height_of_tree(Root.left) , height_of_tree(Root.right));
+    }
+
+    public static int check(int l , int r){
+        if(l>r){
+            return l;
+        }
+        return r;
+    }
+
+
+
+
+    public static int level_in_tree(Node Root){
+        if(Root==null){
+            return -1;
+        }
+        if(Root.parent == null){
+            return 0;
+        }
+        return 1+level_in_tree(Root.parent);
+    }
+
+
+
+
+    public static void pre_order_traversal(Node Root){
+        if(Root!=null){
+            System.out.println(Root.element);
+            pre_order_traversal(Root.left);
+            pre_order_traversal(Root.right);
+        }
+    }
+
+
+
+
+    public static void in_order_traversal(Node Root){
+        if(Root!=null){
+            in_order_traversal(Root.left);
+            System.out.println(Root.element);
+            in_order_traversal(Root.right);
+        }
+    }
+
+
+
+
+    public static void post_order_traversal(Node Root){
+        if(Root!=null){
+            post_order_traversal(Root.left);
+            post_order_traversal(Root.right);
+            System.out.println(Root.element);
+        }
+    }
+
+
+
+
+    public static boolean exactly_same(Node x, Node y) {
+        if (x == null || y == null) {
+            if (x == null && y == null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return x.element.equals(y.element)
+                    && exactly_same(x.left, y.left)
+                    && exactly_same(x.right, y.right);
+        }
+    }
+
+
+
+
+    public static Node copy_tree(Node x) {
+        if (x == null)
+            return null;
+        else {
+            Node copy = new Node(x.element, copy_tree(x.left), copy_tree(x.right), null);
+            return copy;
+        }
+    }
+
+}
+
+
+
+
+public class Node{
+    Object element;
+    Node left;
+    Node right;
+    Node parent;
+
+    public Node (Object e, Node l, Node r, Node p){
+        element = e;
+        left = l;
+        right = r;
+        parent = p;
+    }
+}

@@ -1,0 +1,254 @@
+//Name: Tanmay Bhowmik; ID: 19101465; Sec: 02; Lab-Assignment 06;
+
+
+public class Task01 {
+
+    public static void main (String []args){
+        System.out.println(">>>Task-01<<<");
+        int[]s ={6, 10, 9, 7, 8};
+        s = selectionSort(s, s.length-1);
+        for(int k=0; k<s.length; k++){
+            System.out.println(s[k] + " ");
+        }
+    }
+
+    public static int[] selectionSort(int[]s, int i){
+        if(i==0) return s;
+        int max=-100;
+        int max_index= -200;
+        for(int j=0; j<=i; j++){
+            if(max<s[j]){
+                max=s[j];
+                max_index=j;
+            }
+        }
+        int temp;
+        temp=s[max_index];
+        s[max_index]=s[i];
+        s[i]=temp;
+        return selectionSort(s, i-1);
+    }
+}
+
+
+
+
+public class Task02 {
+
+    public static void main (String []args){
+
+        System.out.println(">>>Task-02<<<");
+        int[]s2 ={6, 10, 9, 7, 8};
+        s2 = insertionSort(s2, 0);
+        for(int k=0; k<s2.length; k++){
+            System.out.println(s2[k] + " ");
+        }
+    }
+
+    public static int[] insertionSort (int[]s2, int i){
+        if(i==s2.length) return s2;
+        int temp;
+        for(int j=i-1; j>=0; j--){
+            if(s2[j]>s2[j+1]){
+                temp=s2[j+1];
+                s2[j+1]=s2[j];
+                s2[j]=temp;
+            }
+            else{
+                break;
+            }
+        }
+        return insertionSort(s2, i+1);
+    }
+}
+
+
+
+
+public class Task03{
+
+    public static void main (String [] args){
+
+        System.out.println(">>>Task-03<<<");
+        int[]s3 = {6, 10, 9, 7, 8};
+
+        Node head = new Node(s3[0] ,null);
+        Node tail = head;
+
+        for(int i = 1 ; i<s3.length ; i++){
+            Node temp = new Node (s3[i], null);
+            tail.next = temp;
+            tail = tail.next;
+        }
+
+        for(Node x = head ; x!=null ; x = x.next){
+            for(Node y = head; y.next!=null ; y = y.next){
+                if((int)y.element>(int)y.next.element){
+                    int temp = y.element;
+                    y.element = y.next.element;
+                    y.next.element = temp;
+                }
+            }
+        }
+
+        for(Node z = head ; z!=null ; z = z.next){
+            System.out.println(z.element);
+        }
+    }
+}
+
+
+
+
+public class Task04{
+
+    public static void main (String[]args){
+
+        System.out.println(">>>Task-04<<<");
+        int []s4 = {6, 10, 9, 7, 8};
+
+        Node head = new Node (s4[0],null);
+        Node tail = head;
+
+        for(int i = 1 ; i<s4.length ; i++){
+            Node temp = new Node (s4[i] , null);
+            tail.next = temp;
+            tail = tail.next;
+        }
+
+        for(Node x = head ; x.next!=null ; x=x.next){
+            Node min_index = x;
+            for(Node y = x.next ; y!=null ; y=y.next){
+                if((int)y.element<(int)min_index.element){
+                    min_index = y;
+                }
+            }
+            int temp = min_index.element;
+            min_index.element = x.element;
+            x.element = temp;
+        }
+
+        for(Node z = head ; z!=null ;z=z.next){
+            System.out.println(z.element);
+        }
+    }
+}
+
+
+
+
+public class Task05 {
+
+    public static void main (String[]args){
+
+        System.out.println(">>>Task-05<<<");
+        int[] s5 = {6, 10, 9, 7, 8};
+
+        Node head = new Node (s5[0] , null , null);
+        Node tail = head;
+
+        for(int i = 1 ; i<s5.length ; i++){
+            Node temp = new Node (s5[i] , null , null);
+            tail.next = temp;
+            temp.prev = tail;
+            tail = tail.next;
+        }
+
+        for(Node x = head ; x!=null ; x = x.next){
+            int temp = x.element;
+
+            Node y = x;
+
+            while(y.prev!=null && (int) y.prev.element> (int)temp){
+                y.element = y.prev.element;
+                y = y.prev;
+            }
+            y.element = temp;
+        }
+
+        for(Node z = head ; z!=null ; z = z.next){
+            System.out.println(z.element);
+        }
+
+    }
+}
+
+
+
+
+public class Task06 {
+
+    public static void main (String []args){
+
+        System.out.println(">>>Task-06<<<");
+        int[]s6={2, 3, 4, 5, 6};
+
+        int Result=binarySearch(s6, 6, 0, s6.length-1);
+        if(Result==-1)
+            System.out.println("Element Not Located");
+        else
+            System.out.println("Element Located at " + Result);
+    }
+
+    public static int binarySearch(int[] s, int searchElement, int start_index, int end_index) {
+
+        if (start_index > end_index) return -1;
+
+        int mid = (start_index + end_index) / 2;
+        if (s[mid] == searchElement) return mid;
+
+        if (searchElement < s[mid]) return binarySearch(s, searchElement, start_index, mid-1);
+
+        return binarySearch(s, searchElement, mid+1,end_index);
+    }
+
+
+}
+
+
+
+
+public class Task07 {
+    public static void main (String[]args){
+        int f = FibMemoi(10);
+        System.out.println(s7[10]);
+
+    }
+    public static int FibMemoi (int n){
+        if(s7[n]>0) return s7[n];
+        if(n==1 || n==0) return s7[n]=1;
+        else return s7[n] = FibMemoi(n-1)+FibMemoi(n-2);
+    }
+    public static int s7[]=new int[50];
+
+}
+
+
+
+
+
+public class Node{
+    public int element;
+    public Node next;
+
+    public Node(int e, Node n){
+        element =e ;
+        next = n;
+    }
+}
+
+
+
+
+public class Node{
+    
+    public int element;
+    public Node next;
+    public Node prev;
+
+    public Node(int e, Node n, Node p){
+        element =e ;
+        next = n;
+        prev =p;
+    }
+}
